@@ -325,7 +325,7 @@ func appendAuthorizedKeysToFile(keys ...*PublicKey) error {
 	sshOpLocker.Lock()
 	defer sshOpLocker.Unlock()
 
-	fpath := filepath.Join(setting.SSH.RootPath, "authorized_keys")
+	fpath := filepath.Join(setting.SSH.RootPath, "authorized_keys2")
 	f, err := os.OpenFile(fpath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
 	if err != nil {
 		return err
@@ -524,7 +524,7 @@ func RewriteAuthorizedKeys() error {
 	log.Trace("Doing: RewriteAuthorizedKeys")
 
 	os.MkdirAll(setting.SSH.RootPath, os.ModePerm)
-	fpath := filepath.Join(setting.SSH.RootPath, "authorized_keys")
+	fpath := filepath.Join(setting.SSH.RootPath, "authorized_keys2")
 	tmpPath := fpath + ".tmp"
 	f, err := os.OpenFile(tmpPath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
